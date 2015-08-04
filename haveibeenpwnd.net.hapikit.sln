@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "haveibeenpwnd.net.hapisdk", "src\haveibeenpwnd.net.hapisdk\haveibeenpwnd.net.hapisdk.csproj", "{6C758B10-E2B4-4F0F-8674-8DD74CEFBDBD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "haveibeenpwnd.net.hapikit", "src\haveibeenpwnd.net.hapisdk\haveibeenpwnd.net.hapikit.csproj", "{6C758B10-E2B4-4F0F-8674-8DD74CEFBDBD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "haveibeenpwnd.tests", "test\haveibeenpwnd.tests\haveibeenpwnd.tests.csproj", "{9E9193F3-C5D9-440D-A56E-5E172395DC63}"
 EndProject

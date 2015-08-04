@@ -65,9 +65,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\haveibeenpwnd.net.hapisdk\haveibeenpwnd.net.hapisdk.csproj">
+    <ProjectReference Include="..\..\src\haveibeenpwnd.net.hapisdk\haveibeenpwnd.net.hapikit.csproj">
       <Project>{6c758b10-e2b4-4f0f-8674-8dd74cefbdbd}</Project>
-      <Name>haveibeenpwnd.net.hapisdk</Name>
+      <Name>haveibeenpwnd.net.hapikit</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
