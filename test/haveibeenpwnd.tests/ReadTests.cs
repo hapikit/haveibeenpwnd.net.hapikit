@@ -45,7 +45,7 @@ namespace haveibeenpwnd.tests
 
             var isPwnd = new Model<bool>();
 
-            var machine = AttachBreachedResponseMachine(isPwnd);
+            var machine = CreateBreachedResponseMachine(isPwnd);
 
             await _httpClient.FollowLinkAsync(breachAccountLink, machine);
 
@@ -54,19 +54,19 @@ namespace haveibeenpwnd.tests
 
         }
 
-        private static HttpResponseMachine<Model<bool>> AttachBreachedResponseMachine(Model<bool> isPwnd)
+        private static HttpResponseMachine<Model<bool>> CreateBreachedResponseMachine(Model<bool> isPwnd)
         {
             var machine = new HttpResponseMachine<Model<bool>>(isPwnd);
-            machine.AddResponseHandler(async (m, l, r) =>
+            machine.AddResponseHandler( (m, l, r) =>
             {
                 m.Value = false;
-                return r;
+                return Task.FromResult(r);
             }, HttpStatusCode.NotFound);
 
-            machine.AddResponseHandler(async (m, l, r) =>
+            machine.AddResponseHandler((m, l, r) =>
             {
                 m.Value = true;
-                return r;
+                return Task.FromResult(r);
             }, HttpStatusCode.OK);
             return machine;
         }
@@ -84,7 +84,7 @@ namespace haveibeenpwnd.tests
 
             var isPwnd = new Model<bool>();
 
-            var machine = AttachBreachedResponseMachine(isPwnd);
+            var machine = CreateBreachedResponseMachine(isPwnd);
 
             var response = await _httpClient.FollowLinkAsync(breachAccountLink, machine);
 
@@ -97,7 +97,7 @@ namespace haveibeenpwnd.tests
         [Fact]
         public async Task GetDataClasses()
         {
-            var dataClassLink = new DataClassLink();
+            var dataClassLink = new DataClassesLink();
 
             var response = await _httpClient.FollowLinkAsync(dataClassLink);
 

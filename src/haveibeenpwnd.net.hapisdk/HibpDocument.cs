@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 using Hapikit.Links;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
+ 
 namespace haveibeenpwnd.net.hapisdk
 {
+
     public class HibpDocument
     {
+        public class HibpMap<T> : Dictionary<string, Action<JProperty, T>> {}        
+       
         public Dictionary<string, JProperty> Properties { get; set; }
 
         public HibpDocument()
@@ -22,6 +25,7 @@ namespace haveibeenpwnd.net.hapisdk
 
         public static HibpDocument Parse(Stream stream)
         {
+            if (stream.CanSeek && stream.Length == 0) return new HibpDocument();   
             var token = JToken.Load(new JsonTextReader(new StreamReader(stream)));
             return Parse(token);
         }
@@ -30,7 +34,7 @@ namespace haveibeenpwnd.net.hapisdk
         {
             var jroot = token as JObject;
 
-            if (jroot == null) throw new Exception("Hibp documents must have an object as the root");
+            if (jroot == null) throw new ArgumentException("Hibp documents must have an object as the root");
 
             var hibpDocument = new HibpDocument();
 
@@ -42,7 +46,7 @@ namespace haveibeenpwnd.net.hapisdk
         }
 
 
-        public T ParseMessage<T>(Dictionary<string, Action<JProperty, T>> propertyMap, bool strict = false) where T : class, new()
+        public T ParseMessage<T>(HibpMap<T> propertyMap, bool strict = false) where T : class, new()
         {
 
             var message = new T();
@@ -67,29 +71,29 @@ namespace haveibeenpwnd.net.hapisdk
             return (string)prop.Value;
         }
 
-        internal static bool ReadAsBoolean(JProperty prop)
+        public static bool ReadAsBoolean(JProperty prop)
         {
             return (bool)prop.Value;
         }
 
-        internal static DateTime ReadAsDateTime(JProperty prop)
+        public static DateTime ReadAsDateTime(JProperty prop)
         {
             if (prop.Value == null) return DateTime.MinValue;
 
             return (DateTime)prop.Value;
         }
 
-        internal static Guid ReadAsGuid(JProperty prop)
+        public static Guid ReadAsGuid(JProperty prop)
         {
             return (Guid)prop.Value;
         }
 
-        internal static int ReadAsInteger(JProperty prop)
+        public static int ReadAsInteger(JProperty prop)
         {
             return (int)prop.Value;
         }
 
-        internal static T ReadAsLink<T>(JObject linkObject) where T : Link, new()
+        public static T ReadAsLink<T>(JObject linkObject) where T : Link, new()
         {
             var href = linkObject.Property("href");
             return new T()
