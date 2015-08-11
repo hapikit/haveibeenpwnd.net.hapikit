@@ -34,12 +34,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Messages\BreachedAccount.cs" />
+    <Compile Include="Messages\BreachesMessage.cs" />
     <Compile Include="HibpDocument.cs" />
-    <Compile Include="BreachedAccountLink.cs" />
-    <Compile Include="BreachesLink.cs" />
-    <Compile Include="BreachLink.cs" />
-    <Compile Include="BreachMessage.cs" />
-    <Compile Include="DataClassLink.cs" />
+    <Compile Include="Links\BreachedAccountLink.cs" />
+    <Compile Include="Links\BreachesLink.cs" />
+    <Compile Include="Links\BreachLink.cs" />
+    <Compile Include="Messages\BreachMessage.cs" />
+    <Compile Include="Links\DataClassesLink.cs" />
+    <Compile Include="HibpVocab.cs" />
+    <Compile Include="Messages\DataClassesMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
