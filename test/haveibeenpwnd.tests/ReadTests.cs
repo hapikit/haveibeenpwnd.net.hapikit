@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Hapikit.Links;
 using Hapikit.ResponseHandlers;
 using haveibeenpwnd.net.hapisdk;
 using Hapikit;
@@ -57,16 +58,16 @@ namespace haveibeenpwnd.tests
         private static HttpResponseMachine<Model<bool>> CreateBreachedResponseMachine(Model<bool> isPwnd)
         {
             var machine = new HttpResponseMachine<Model<bool>>(isPwnd);
-            machine.AddResponseHandler( (m, l, r) =>
+            machine.AddResponseAction( async (m, l, r) =>
             {
                 m.Value = false;
-                return Task.FromResult(r);
+
             }, HttpStatusCode.NotFound);
 
-            machine.AddResponseHandler((m, l, r) =>
+            machine.AddResponseAction(async (m, l, r) =>
             {
                 m.Value = true;
-                return Task.FromResult(r);
+
             }, HttpStatusCode.OK);
             return machine;
         }
@@ -124,6 +125,31 @@ namespace haveibeenpwnd.tests
             Assert.Equal("Adobe", message.Name);
 
             
+
+        }
+
+        [Fact]
+        public async Task GetBreachWithParsingMachine()
+        {
+            var breachLink = new BreachLink()
+            {
+                Name = "adobe"
+            };
+
+            var parserStore = new ParserStore();
+
+            parserStore.AddMediaTypeParser("application/json", async (c) => HibpDocument.Parse(await c.ReadAsStreamAsync()));
+            parserStore.AddLinkRelationParser<HibpDocument, BreachMessage>(LinkHelper.GetLinkRelationTypeName<BreachLink>(), BreachMessage.Parse);
+
+            var machine = new HttpResponseMachine(parserStore);
+
+            BreachMessage message = null;
+            machine.AddResponseAction<BreachMessage>((l, bm) => { message = bm; }, HttpStatusCode.OK);
+
+            await _httpClient.FollowLinkAsync(breachLink,machine);
+
+            Assert.NotNull(message);
+            Assert.Equal("Adobe", message.Name);
 
         }
     }

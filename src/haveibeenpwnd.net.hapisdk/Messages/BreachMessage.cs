@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Newtonsoft.Json.Linq;
 
 namespace haveibeenpwnd.net.hapisdk
 {
@@ -24,6 +26,7 @@ namespace haveibeenpwnd.net.hapisdk
             _PropertyMap.Add(HibpVocab.BreachDate,        (p,t) => t.BreachDate = HibpDocument.ReadAsDateTime(p));
             _PropertyMap.Add(HibpVocab.AddedDate,        (p,t) => t.AddedDate = HibpDocument.ReadAsDateTime(p));
             _PropertyMap.Add(HibpVocab.Description,        (p,t) => t.Description = HibpDocument.ReadAsString(p));
+            _PropertyMap.Add(HibpVocab.DataClasses, (p, t) => t.DataClasses = ((JArray)p.Value).Select(jDataClass => (string)jDataClass).ToArray());
 
         }
         public static BreachMessage Parse(HibpDocument doc)

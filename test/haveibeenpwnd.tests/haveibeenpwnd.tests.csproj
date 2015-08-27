@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="HibpServiceTests.cs" />
     <Compile Include="ReadTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -42,9 +43,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Hapikit.net, Version=0.8.0.30830, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Hapikit.net, Version=0.8.0.34065, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Hapikit.net.0.1.0-alpha\lib\portable-net45+sl5+wp8+win8+wpa81+MonoTouch1+MonoAndroid1\Hapikit.net.dll</HintPath>
+      <HintPath>..\..\packages\Hapikit.net.0.1.0-alpha4\lib\portable-net45+sl5+wp8+win8+wpa81+MonoTouch1+MonoAndroid1\Hapikit.net.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

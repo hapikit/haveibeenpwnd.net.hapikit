@@ -34,21 +34,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Messages\BreachedAccount.cs" />
-    <Compile Include="Messages\BreachesMessage.cs" />
+    <Compile Include="HibpMachineFactory.cs" />
+    <Compile Include="HibpService.cs" />
     <Compile Include="HibpDocument.cs" />
     <Compile Include="Links\BreachedAccountLink.cs" />
     <Compile Include="Links\BreachesLink.cs" />
     <Compile Include="Links\BreachLink.cs" />
+    <Compile Include="Links\PasteAccountLink.cs" />
     <Compile Include="Messages\BreachMessage.cs" />
     <Compile Include="Links\DataClassesLink.cs" />
     <Compile Include="HibpVocab.cs" />
-    <Compile Include="Messages\DataClassesMessage.cs" />
+    <Compile Include="Messages\PasteMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Hapikit.net">
-      <HintPath>..\..\packages\Hapikit.net.0.1.0-alpha\lib\portable-net45+sl5+wp8+win8+wpa81+MonoTouch1+MonoAndroid1\Hapikit.net.dll</HintPath>
+      <HintPath>..\..\packages\Hapikit.net.0.1.0-alpha4\lib\portable-net45+sl5+wp8+win8+wpa81+MonoTouch1+MonoAndroid1\Hapikit.net.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>

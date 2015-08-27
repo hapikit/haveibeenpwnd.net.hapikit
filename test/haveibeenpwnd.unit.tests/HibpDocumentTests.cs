@@ -35,22 +35,7 @@ namespace haveibeenpwnd.unit.tests
             Assert.Equal("boo", HibpDocument.ReadAsString(doc.Properties["baz"]));
         }
 
-        [Fact]
-        public void Hibp_document_does_not_support_array_at_root()
-        {
-            bool exceptionThrown = false;
-            var sourceStream = CreateJsonStream("[]");
-            try
-            {
-                var doc = HibpDocument.Parse(sourceStream);
-            }
-            catch (ArgumentException ex)
-            {
-                exceptionThrown = true;
-            }
-            Assert.True(exceptionThrown);
-            
-        }
+     
 
         [Fact]
         public void Hibp_document_does_not_support_string_at_root()

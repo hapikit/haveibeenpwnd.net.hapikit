@@ -13,8 +13,10 @@ namespace haveibeenpwnd.net.hapisdk
 
     public class HibpDocument
     {
-        public class HibpMap<T> : Dictionary<string, Action<JProperty, T>> {}        
-       
+        public class HibpMap<T> : Dictionary<string, Action<JProperty, T>> {}
+
+        public List<HibpDocument> ChildDocuments { get; set; }
+
         public Dictionary<string, JProperty> Properties { get; set; }
 
         public HibpDocument()
@@ -32,15 +34,31 @@ namespace haveibeenpwnd.net.hapisdk
 
         public static HibpDocument Parse(JToken token)
         {
+            var jarray = token as JArray;
+            if (jarray != null)
+            {
+                return ParseAsList(jarray);
+            }
             var jroot = token as JObject;
 
-            if (jroot == null) throw new ArgumentException("Hibp documents must have an object as the root");
+            if (jroot == null) throw new ArgumentException("Hibp documents must have an object or array as the root");
 
             var hibpDocument = new HibpDocument();
 
             foreach (var prop in jroot.Properties())
             {
                hibpDocument.Properties.Add(prop.Name, prop);
+            }
+            return hibpDocument;
+        }
+
+        private static HibpDocument ParseAsList(JArray jarray)
+        {
+            var hibpDocument = new HibpDocument();
+            hibpDocument.ChildDocuments = new List<HibpDocument>();
+            foreach (var jtoken in jarray)
+            {
+                hibpDocument.ChildDocuments.Add(Parse(jtoken));
             }
             return hibpDocument;
         }

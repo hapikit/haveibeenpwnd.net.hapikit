@@ -7,6 +7,7 @@ using Hapikit.Links;
 
 namespace haveibeenpwnd.net.hapisdk
 {
+    [LinkRelationType("https://haveibeenpwnd.com/rels/breach")]
     public class BreachLink : Link
     {
         public string Name { get; set; }

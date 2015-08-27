@@ -3,6 +3,7 @@ using Hapikit.Templates;
 
 namespace haveibeenpwnd.net.hapisdk
 {
+    [LinkRelationType("https://haveibeenpwnd.com/rels/dataclasses")]
     public class DataClassesLink : Link
     {
         public DataClassesLink()

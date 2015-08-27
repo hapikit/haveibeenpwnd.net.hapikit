@@ -8,6 +8,7 @@ using Hapikit.Templates;
 
 namespace haveibeenpwnd.net.hapisdk
 {
+    [LinkRelationType("https://haveibeenpwnd.com/rels/breachedaccount")]
     public class BreachedAccountLink : Link
     {
         public string Account { get; set; }
